@@ -19,10 +19,19 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-.controller('LahanCtrl', function($rootScope,$scope,$state) {
+.controller('LahanCtrl', function($rootScope,$scope,$state,Lahan) {
   $scope.tambah = function(){
     $state.go('app.tambah');
   };
+  $scope.showLahan = function(){
+    Lahan.getAll().success(function (data) {
+      $scope.lahans = data;
+      console.log(data);
+    },function(error){
+      console.log(error)
+    });
+  };
+  $scope.showLahan();
 })
 
 .controller('TambahCtrl', function($scope,$state, Lahan){
@@ -39,9 +48,11 @@ angular.module('starter.controllers', [])
       bo: $scope.data.bo,
       kedalaman: $scope.data.kedalaman,
       kemiringan: $scope.data.kemiringan,
-    };
+    }
 
-    Lahan.tambah(data);
+    Lahan.tambah(data).success(function () {
+      $state.go('app.lahan')
+    });
   }
 })
 

@@ -1,7 +1,6 @@
 <ion-view view-title="Tambah Lahan">
   <ion-content>
-    <h1>Tambah Lahan</h1>
-    <div class="list">
+    <div class="list list-inset">
       <label class="item item-input">
         <input type="text" placeholder="Nama Lahan" ng-model="data.nama">
       </label>
@@ -29,7 +28,8 @@
       <label class="item item-input">
         <input type="text" placeholder="Kemiringan Lahan" ng-model="data.kemiringan">
       </label>
+      <button class="button button-block button-balanced" ng-click="tambahLahan()">Simpan</button>
     </div>
-    <button class="button button-block button-balanced" ng-click="tambahLahan()">Simpan</button>
+
   </ion-content>
 </ion-view>
