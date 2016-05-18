@@ -43,6 +43,15 @@ angular.module('starter', ['ionic', 'starter.controllers','satellizer'])
         }
       }
     })
+    .state('app.tambah', {
+      url: '/tambah',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/tambah.html',
+          controller: 'TambahCtrl'
+        }
+      }
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',

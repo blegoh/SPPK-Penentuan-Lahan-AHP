@@ -19,6 +19,36 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
+.controller('LahanCtrl', function($rootScope,$scope,$state) {
+  $scope.tambah = function(){
+    $state.go('app.tambah');
+  };
+})
+
+.controller('TambahCtrl', function($scope,$state, Lahan){
+
+  $scope.data = {};
+  $scope.tambahLahan = function () {
+    var data = {
+      nama: $scope.data.email,
+      tinggi: $scope.data.tinggi,
+      suhu: $scope.data.suhu,
+      curah_hujan: $scope.data.hujan,
+      bulan_kering: $scope.data.bulan,
+      ph: $scope.data.ph,
+      bo: $scope.data.bo,
+      kedalaman: $scope.data.kedalaman,
+      kemiringan: $scope.data.kemiringan,
+    }
+
+    Lahan.tambah(data).success(function (data) {
+
+    }, function (error) {
+      console.log(error)
+    });
+  }
+})
+
 .controller('LoginCtrl', function($scope, $ionicPopup, $state,$auth) {
 
   $scope.data = {};
