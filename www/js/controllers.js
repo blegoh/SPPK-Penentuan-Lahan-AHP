@@ -30,7 +30,7 @@ angular.module('starter.controllers', [])
   $scope.data = {};
   $scope.tambahLahan = function () {
     var data = {
-      nama: $scope.data.email,
+      nama: $scope.data.nama,
       tinggi: $scope.data.tinggi,
       suhu: $scope.data.suhu,
       curah_hujan: $scope.data.hujan,
@@ -39,13 +39,9 @@ angular.module('starter.controllers', [])
       bo: $scope.data.bo,
       kedalaman: $scope.data.kedalaman,
       kemiringan: $scope.data.kemiringan,
-    }
+    };
 
-    Lahan.tambah(data).success(function (data) {
-
-    }, function (error) {
-      console.log(error)
-    });
+    Lahan.tambah(data);
   }
 })
 

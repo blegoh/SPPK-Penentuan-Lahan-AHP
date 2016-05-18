@@ -1,12 +1,9 @@
-/**
- * Created by blegoh on 18/05/16.
- */
-angular.module('starter.services')
+angular.module('starter.services',[])
 
   .factory('Lahan', function($http) {
     return {
       getAll: function() {
-        return $http.get('http://be.com/').success(function(data) {
+        return $http.get('http://be.com/api/lahan/').success(function(data) {
           console.log(data);
           return data;
         }).error(function(err) {
@@ -15,8 +12,10 @@ angular.module('starter.services')
         });
       },
       tambah: function (data){
-        $http.post('http://be.com/api/lahan/store', data).success(function(response) {
-          
+        console.log(data);
+
+        $http.post('http://be.com/api/lahan/', data).success(function(response) {
+          console.log('asu');
         }).error(function(){
           console.log("error");
         });
