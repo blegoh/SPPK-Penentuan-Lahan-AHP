@@ -1,0 +1,47 @@
+<ion-view view-title="Detail Lahan">
+  <ion-content>
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Nama Lahan</span>
+        <input type="text" ng-model="lahan.name">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Ketinggian Lahan</span>
+        <input type="text" ng-model="lahan.tinggi_tempat">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Suhu Lahan</span>
+        <input type="text" ng-model="lahan.suhu">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Curah Hujan Lahan</span>
+        <input type="text" ng-model="lahan.curah_hujan">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Jumlah Bulan Kering</span>
+        <input type="text" ng-model="lahan.jumlah_bulan_kering">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">pH Lahan</span>
+        <input type="text" ng-model="lahan.ph">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Kandungan BO Lahan</span>
+        <input type="text" ng-model="lahan.bo">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Kedalaman Efektif</span>
+        <input type="text" ng-model="lahan.kedalaman">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Kemiringan Lahan</span>
+        <input type="text" ng-model="lahan.kemiringan">
+      </label>
+    </div>
+      <div class="col">
+        <button class="button button-block button-balanced" ng-click="update()">Update</button>
+        <button class="button button-block button-assertive" ng-click="delete()">Delete</button>
+      </div>
+
+  </ion-content>
+</ion-view>

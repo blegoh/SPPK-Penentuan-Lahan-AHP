@@ -66,6 +66,16 @@ angular.module('starter', ['ionic', 'starter.controllers','satellizer','starter.
           controller: 'PlaylistCtrl'
         }
       }
+  })
+
+  .state('app.detail', {
+    url: '/detail/:lahanId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/detail-lahan.html',
+        controller: 'DetailCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

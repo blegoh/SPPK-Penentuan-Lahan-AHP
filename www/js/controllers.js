@@ -23,15 +23,31 @@ angular.module('starter.controllers', [])
   $scope.tambah = function(){
     $state.go('app.tambah');
   };
+  $rootScope.$on('todo:lahanChanged', function() {
+    $scope.showLahan();
+  });
   $scope.showLahan = function(){
     Lahan.getAll().success(function (data) {
       $scope.lahans = data;
-      console.log(data);
     },function(error){
       console.log(error)
     });
   };
   $scope.showLahan();
+})
+
+.controller('DetailCtrl', function($rootScope,$scope,$stateParams,$state,Lahan) {
+  $scope.update = function(){
+    
+  };
+
+  Lahan.detail($stateParams.lahanId).success(function (data) {
+    $scope.lahan = data;
+    console.log("tets");
+    console.log(data);
+  },function(error){
+    console.log(error)
+  });
 })
 
 .controller('TambahCtrl', function($scope,$state, Lahan){
@@ -51,7 +67,8 @@ angular.module('starter.controllers', [])
     }
 
     Lahan.tambah(data).success(function () {
-      $state.go('app.lahan')
+      $scope.$emit('todo:lahanChanged');
+      $state.go('app.lahan');
     });
   }
 })
