@@ -25,7 +25,7 @@ angular.module('starter.services',[])
           return err;
         });
       },
-      update: function (id) {
+      update: function (id,data) {
         return $http.put('http://be.com/api/lahan/'+id, data).success(function(response) {
           return response;
         }).error(function(){
@@ -33,7 +33,7 @@ angular.module('starter.services',[])
         });
       },
       delete: function (id) {
-        return $http.delete('http://be.com/api/lahan/'+id, data).success(function(response) {
+        return $http.delete('http://be.com/api/lahan/'+id).success(function(response) {
           return response;
         }).error(function(){
           console.log("error");

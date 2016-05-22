@@ -37,14 +37,35 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DetailCtrl', function($rootScope,$scope,$stateParams,$state,Lahan) {
+
   $scope.update = function(){
-    
+    var data = {
+      name: $scope.lahan.name,
+      tinggi_tempat: $scope.lahan.tinggi_tempat,
+      suhu: $scope.lahan.suhu,
+      curah_hujan: $scope.lahan.curah_hujan,
+      jumlah_bulan_kering: $scope.lahan.jumlah_bulan_kering,
+      ph: $scope.lahan.ph,
+      bo: $scope.lahan.bo,
+      kedalaman: $scope.lahan.kedalaman,
+      kemiringan: $scope.lahan.kemiringan,
+    }
+
+    Lahan.update($stateParams.lahanId,data).success(function () {
+      $scope.$emit('todo:lahanChanged');
+      $state.go('app.lahan');
+    });
+  };
+
+  $scope.delete = function(){
+    Lahan.delete($stateParams.lahanId).success(function () {
+      $scope.$emit('todo:lahanChanged');
+      $state.go('app.lahan');
+    });
   };
 
   Lahan.detail($stateParams.lahanId).success(function (data) {
     $scope.lahan = data;
-    console.log("tets");
-    console.log(data);
   },function(error){
     console.log(error)
   });
@@ -74,7 +95,12 @@ angular.module('starter.controllers', [])
 })
 
 .controller('LoginCtrl', function($scope, $ionicPopup, $state,$auth) {
-
+  $scope.showAlert = function () {
+    var alert = $ionicPopup.alert({
+      title: 'Warning',
+      template: 'Username atau Password salah'
+    });
+  }
   $scope.data = {};
   $scope.login = function() {
 
@@ -89,7 +115,7 @@ angular.module('starter.controllers', [])
       // If login is successful, redirect to the users state
       $state.go('app.lahan');
     }, function(error) {
-      //console.log(credentials);
+      $scope.showAlert();
       console.log(error);
     });
   }
