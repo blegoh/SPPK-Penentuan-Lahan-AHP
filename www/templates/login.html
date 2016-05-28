@@ -6,14 +6,23 @@
       </center>
       <h1>SPPK</h1>
     </div>
-    <div class="list list-inset">
-      <label class="item item-input">
-        <input type="text" placeholder="Email" ng-model="data.email">
-      </label>
-      <label class="item item-input">
-        <input type="password" placeholder="Password" ng-model="data.password">
-      </label>
-    </div>
-    <button class="button button-block button-calm" ng-click="login()">Login</button>
+    <form ng-submit="login()" name="loginForm" novalidate="">
+      <div class="list list-inset">
+        <label class="item item-input" ng-class="{ 'has-error' : signinForm.email.$invalid}">
+          <input type="email" name="email" placeholder="Email" ng-model="data.email" required >
+        </label>
+        <div ng-messages="loginForm.email.$error" class="form-errors" ng-if="loginForm.email.$touched" >
+          <div class="form-error" ng-message="required">Email Harus Diisi</div>
+          <div class="form-error" ng-message="email">Email Harus Valid</div>
+        </div>
+        <label class="item item-input"ng-class="{ 'has-error' : signinForm.password.$invalid}">
+          <input type="password" name="password" placeholder="Password" ng-model="data.password" required >
+        </label>
+        <div ng-messages="loginForm.password.$error" class="form-errors" >
+          <div class="form-error" ng-message="required">Password Harus Diisi</div>
+        </div>
+      </div>
+      <button class="button button-block button-calm" type="submit" ng-disabled="loginForm.$invalid">Login</button>
+
   </ion-content>
 </ion-view>

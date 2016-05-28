@@ -1,35 +1,45 @@
 <ion-view view-title="Tambah Lahan">
   <ion-content>
+    <form name="myForm">
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" placeholder="Nama Lahan" ng-model="data.nama">
+        <input type="text" placeholder="Nama Lahan" ng-model="data.nama" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Ketinggian Lahan" ng-model="data.tinggi">
+        <input type="text" placeholder="Ketinggian Lahan" ng-model="data.tinggi" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Suhu Lahan" ng-model="data.suhu">
+        <input type="text" placeholder="Suhu Lahan" ng-model="data.suhu" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Curah Hujan Lahan" ng-model="data.hujan">
+        <input type="text" placeholder="Curah Hujan Lahan" ng-model="data.hujan" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Jumlah Bulan Kering" ng-model="data.bulan">
+        <input type="text" placeholder="Jumlah Bulan Kering" ng-model="data.bulan" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="pH Lahan" ng-model="data.ph">
+        <input type="text" placeholder="pH Lahan" ng-model="data.ph" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Kandungan BO Lahan" ng-model="data.bo">
+        <input type="text" placeholder="Kandungan BO Lahan" ng-model="data.bo" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Kedalaman Efektif" ng-model="data.kedalaman">
+        <input type="text" placeholder="Kedalaman Efektif" ng-model="data.kedalaman" required >
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Kemiringan Lahan" ng-model="data.kemiringan">
+        <input type="text" placeholder="Kemiringan Lahan" ng-model="data.kemiringan" required >
       </label>
       <button class="button button-block button-balanced" ng-click="tambahLahan()">Simpan</button>
     </div>
+
+    <div ng-messages="myForm.myName.$error" role="alert">
+      <div class="form-error" ng-message="required">You did not enter a field</div>
+      <div class="form-error" ng-message="minlength">Your field is too short</div>
+      <div class="form-error" ng-message="maxlength">Your field is too long</div>
+    </div>
+
+    </form>
+
 
   </ion-content>
 </ion-view>
