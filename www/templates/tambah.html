@@ -1,45 +1,74 @@
 <ion-view view-title="Tambah Lahan">
   <ion-content>
-    <form name="myForm">
+    <form name="lahanForm" ng-submit="tambahLahan()" novalidate="" >
     <div class="list list-inset">
-      <label class="item item-input">
-        <input type="text" placeholder="Nama Lahan" ng-model="data.nama" required >
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.name.$invalid && lahanForm.name.$touched}">
+        <input type="text" placeholder="Nama Lahan" name="name" ng-model="data.nama" required >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Ketinggian Lahan" ng-model="data.tinggi" required >
+      <div ng-messages="lahanForm.name.$error" class="form-errors" ng-if="lahanForm.name.$touched" >
+        <div class="form-error" ng-message="required">Nama Lahan Harus Diisi</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.height.$invalid && lahanForm.height.$touched}">
+        <input type="number" placeholder="Ketinggian Lahan" name="height" ng-model="data.tinggi" required >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Suhu Lahan" ng-model="data.suhu" required >
+      <div ng-messages="lahanForm.height.$error" class="form-errors" ng-if="lahanForm.height.$touched" >
+        <div class="form-error" ng-message="required">Ketinggian Lahan Harus Diisi</div>
+        <div class="form-error" ng-message="number">Ketinggian Lahan Harus Berupa Angka</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.temperature.$invalid && lahanForm.temperature.$touched}">
+        <input type="number" placeholder="Suhu Lahan" name="temperature" ng-model="data.suhu" required >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Curah Hujan Lahan" ng-model="data.hujan" required >
+      <div ng-messages="lahanForm.temperature.$error" class="form-errors" ng-if="lahanForm.temperature.$touched" >
+        <div class="form-error" ng-message="required">Suhu Lahan Harus Diisi</div>
+        <div class="form-error" ng-message="number">Ketinggian Lahan Harus Berupa Angka</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.curahHujan.$invalid && lahanForm.curahHujan.$touched}">
+        <input type="number" placeholder="Curah Hujan Lahan" name="curahHujan" ng-model="data.hujan" required >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Jumlah Bulan Kering" ng-model="data.bulan" required >
+      <div ng-messages="lahanForm.curahHujan.$error" class="form-errors" ng-if="lahanForm.curahHujan.$touched" >
+        <div class="form-error" ng-message="required">Curah Hujan Harus Diisi</div>
+        <div class="form-error" ng-message="number">Ketinggian Lahan Harus Berupa Angka</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.bulanKering.$invalid && lahanForm.bulanKering.$touched}">
+        <input type="number" placeholder="Jumlah Bulan Kering" name="bulanKering" ng-model="data.bulan" required >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="pH Lahan" ng-model="data.ph" required >
+      <div ng-messages="lahanForm.bulanKering.$error" class="form-errors" ng-if="lahanForm.bulanKering.$touched" >
+        <div class="form-error" ng-message="required">Jumlah Bulan Harus Diisi</div>
+        <div class="form-error" ng-message="number">Ketinggian Lahan Harus Berupa Angka</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.ph.$invalid && lahanForm.ph.$touched}">
+        <input type="number" placeholder="pH Tanah" name="ph" ng-model="data.ph" required min="1" max="14" >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Kandungan BO Lahan" ng-model="data.bo" required >
+      <div ng-messages="lahanForm.ph.$error" class="form-errors" ng-if="lahanForm.ph.$touched" >
+        <div class="form-error" ng-message="required">pH Tanah Harus Diisi</div>
+        <div class="form-error" ng-message="number">pH Tanah Harus Berupa Angka</div>
+        <div class="form-error" ng-message="min">pH Tanah Minimal 1</div>
+        <div class="form-error" ng-message="max">pH Tanah Maksimal 14</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.bo.$invalid && lahanForm.bo.$touched}">
+        <input type="number" placeholder="Kandungan BO Tanah" name="bo" ng-model="data.bo" required >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Kedalaman Efektif" ng-model="data.kedalaman" required >
+      <div ng-messages="lahanForm.bo.$error" class="form-errors" ng-if="lahanForm.bo.$touched" >
+        <div class="form-error" ng-message="required">Kandungan BO Tanah Harus Diisi</div>
+        <div class="form-error" ng-message="number">Kandungan BO Tanah Harus Berupa Angka</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.deep.$invalid && lahanForm.deep.$touched}">
+        <input type="number" placeholder="Kedalaman Efektif" name="deep" ng-model="data.kedalaman" required >
       </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Kemiringan Lahan" ng-model="data.kemiringan" required >
+      <div ng-messages="lahanForm.deep.$error" class="form-errors" ng-if="lahanForm.deep.$touched" >
+        <div class="form-error" ng-message="required">Kedalaman Efektif Harus Diisi</div>
+        <div class="form-error" ng-message="number">Kedalaman Efektif Harus Berupa Angka</div>
+      </div>
+      <label class="item item-input" ng-class="{ 'has-error' : lahanForm.miring.$invalid && lahanForm.miring.$touched}">
+        <input type="number" placeholder="Kemiringan Lahan" name="miring" ng-model="data.kemiringan" required >
       </label>
-      <button class="button button-block button-balanced" ng-click="tambahLahan()">Simpan</button>
+      <div ng-messages="lahanForm.miring.$error" class="form-errors" ng-if="lahanForm.miring.$touched" >
+        <div class="form-error" ng-message="required">Kemiringan Lahan Harus Diisi</div>
+        <div class="form-error" ng-message="number">Kemiringan Lahan Harus Berupa Angka</div>
+      </div>
+      <button class="button button-block button-balanced" type="submit" ng-disabled="lahanForm.$invalid" >Simpan</button>
     </div>
-
-    <div ng-messages="myForm.myName.$error" role="alert">
-      <div class="form-error" ng-message="required">You did not enter a field</div>
-      <div class="form-error" ng-message="minlength">Your field is too short</div>
-      <div class="form-error" ng-message="maxlength">Your field is too long</div>
-    </div>
-
     </form>
-
 
   </ion-content>
 </ion-view>

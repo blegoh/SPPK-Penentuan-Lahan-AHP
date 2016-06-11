@@ -22,6 +22,26 @@ angular.module('starter', ['ionic','ngMessages','starter.controllers','satellize
   });
 })
 
+  .run(function($rootScope) {
+    $rootScope.typeOf = function(value) {
+      return typeof value;
+    };
+  })
+
+.directive('stringToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(value) {
+        return '' + value;
+      });
+      ngModel.$formatters.push(function(value) {
+        return parseFloat(value, 10);
+      });
+    }
+  };
+})
+
 .config(function($stateProvider, $urlRouterProvider,$authProvider) {
   $authProvider.loginUrl = 'http://be.com/api/authenticate';
 
@@ -64,6 +84,12 @@ angular.module('starter', ['ionic','ngMessages','starter.controllers','satellize
       url: '/login',
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
+    })
+
+    .state('register', {
+      url: '/register',
+      templateUrl: 'templates/register.html',
+      controller: 'RegisterCtrl'
     })
 
     .state('app.single', {

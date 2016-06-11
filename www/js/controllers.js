@@ -1,8 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $auth,$rootScope) {
+  $scope.logout = function () {
+    $auth.logout().then(function() {
 
+      // Remove the authenticated user from local storage
+      localStorage.removeItem('user');
 
+      // Flip authenticated to false so that we no longer
+      // show UI elements dependant on the user being logged in
+      $rootScope.authenticated = false;
+
+      // Remove the current user info from rootscope
+      $rootScope.currentUser = null;
+    });
+  }
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -26,6 +38,7 @@ angular.module('starter.controllers', [])
   $rootScope.$on('todo:lahanChanged', function() {
     $scope.showLahan();
   });
+  console.log($rootScope.currentUser);
   $scope.showLahan = function(){
     Lahan.getAll().success(function (data) {
       $scope.lahans = data;
@@ -38,10 +51,9 @@ angular.module('starter.controllers', [])
 
 .controller('DecisionCtrl', function($rootScope,$scope,$state) {
   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
+  $scope.series = ['Series A'];
   $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
+    [65, 59, 80, 81, 56, 55, 40]
   ];
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
@@ -107,7 +119,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('LoginCtrl', function($scope, $ionicPopup, $state,$auth) {
+.controller('LoginCtrl', function($scope,$rootScope,$ionicPopup, $state,$auth,$http) {
   $scope.showAlert = function () {
     var alert = $ionicPopup.alert({
       title: 'Warning',
@@ -115,6 +127,9 @@ angular.module('starter.controllers', [])
     });
   }
   $scope.data = {};
+  $scope.register = function () {
+    $state.go('register');
+  }
   $scope.login = function() {
 
     var credentials = {
@@ -122,14 +137,38 @@ angular.module('starter.controllers', [])
       password: $scope.data.password
     }
 
-    // Use Satellizer's $auth service to login
-    $auth.login(credentials).then(function(data) {
+    $auth.login(credentials).then(function () {
+      $http.get('http://be.com/api/authenticate/user').success(function(response){
+        var user = JSON.stringify(response.user);
+        localStorage.setItem('user', user);
+        $rootScope.authenticated = true;
 
-      // If login is successful, redirect to the users state
-      $state.go('app.lahan');
-    }, function(error) {
+        $rootScope.currentUser = response.user;
+        $state.go('app.lahan');
+      }).error(function(error){
+        console.log("asu");
+      })
+    }, function (error) {
       $scope.showAlert();
-      console.log(error);
     });
+  }
+
+})
+
+.controller('RegisterCtrl', function($scope, $ionicPopup, $state,Auth) {
+  $scope.data = {};
+  $scope.register = function () {
+    var data = {
+      email: $scope.data.email,
+      name: $scope.data.name,
+      password: $scope.data.password
+    }
+
+    Auth.register(data).success(function () {
+      $state.go('login');
+    })
+  }
+  $scope.back= function () {
+    $state.go('login');
   }
 });

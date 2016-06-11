@@ -3,26 +3,28 @@
     <div id="logo">
       <center>
         <img src="img/ionic.png">
+        <h1>SILOPE</h1>
       </center>
-      <h1>SPPK</h1>
     </div>
-    <form ng-submit="login()" name="loginForm" novalidate="">
+    <form name="loginForm" novalidate="">
       <div class="list list-inset">
-        <label class="item item-input" ng-class="{ 'has-error' : signinForm.email.$invalid}">
+        <label class="item item-input" ng-class="{ 'has-error' : loginForm.email.$invalid && loginForm.email.$touched}">
           <input type="email" name="email" placeholder="Email" ng-model="data.email" required >
         </label>
         <div ng-messages="loginForm.email.$error" class="form-errors" ng-if="loginForm.email.$touched" >
           <div class="form-error" ng-message="required">Email Harus Diisi</div>
           <div class="form-error" ng-message="email">Email Harus Valid</div>
         </div>
-        <label class="item item-input"ng-class="{ 'has-error' : signinForm.password.$invalid}">
+        <label class="item item-input" ng-class="{ 'has-error' : loginForm.password.$invalid && loginForm.password.$touched}">
           <input type="password" name="password" placeholder="Password" ng-model="data.password" required >
         </label>
-        <div ng-messages="loginForm.password.$error" class="form-errors" >
+        <div ng-messages="loginForm.password.$error" class="form-errors" ng-if="loginForm.password.$touched" >
           <div class="form-error" ng-message="required">Password Harus Diisi</div>
         </div>
       </div>
-      <button class="button button-block button-calm" type="submit" ng-disabled="loginForm.$invalid">Login</button>
-
+      <button class="button button-block button-calm" type="submit" ng-click="login()" ng-disabled="loginForm.$invalid">Login</button
+    </form>
+    <div style="text-align: center">Need an account? <a ng-click="register()">Register</a></div>
+    <!--<button class="button button-block button-balanced" ng-click="register()">Register</button>-->
   </ion-content>
 </ion-view>

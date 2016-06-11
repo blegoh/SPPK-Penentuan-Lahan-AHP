@@ -41,3 +41,27 @@ angular.module('starter.services',[])
       },
     };
   })
+
+  .factory('Auth', function($http,$rootScope,$auth) {
+    return {
+      login: function(credentials) {
+        return $auth.login(credentials).then(function() {
+          $http.get('http://be.com/api/authenticate/user').success(function(response){
+            var user = JSON.stringify(response.user);
+            localStorage.setItem('user', user);
+            //$rootScope.currentUser = response.user;
+          }).error(function(error){
+              console.log("asu");
+          })
+        }, function(error) {
+          console.log(error);
+        });
+      },
+      getAuthUser: function () {
+        return localStorage.getItem('user');
+      },
+      register: function (data) {
+        return $http.post('http://be.com/api/register',data);
+      }
+    };
+  })
