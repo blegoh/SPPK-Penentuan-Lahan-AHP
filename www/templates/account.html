@@ -1,0 +1,25 @@
+<ion-view view-title="Account">
+  <ion-content>
+    <div class="list list-inset">
+      <form name="accountForm" ng-submit="update()" novalidate="" >
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : accountForm.name.$invalid && accountForm.name.$touched}">
+          <span class="input-label">Nama</span>
+          <input type="text" name="name" ng-model="user.name" required>
+        </label>
+        <div ng-messages="accountForm.name.$error" class="form-errors" ng-if="accountForm.name.$touched" >
+          <div class="form-error" ng-message="required">Nama Harus Diisi</div>
+        </div>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : accountForm.email.$invalid && accountForm.email.$touched}">
+          <span class="input-label">Email</span>
+          <input type="email" name="email" ng-model="user.email" required>
+        </label>
+        <div ng-messages="accountForm.email.$error" class="form-errors" ng-if="accountForm.email.$touched" >
+          <div class="form-error" ng-message="required">Email Harus Diisi</div>
+          <div class="form-error" ng-message="email">Email Harus Valid</div>
+        </div>
+        <button class="button button-block button-balanced" type="submit">Update</button>
+      </form>
+      <button class="button button-block button-dark" ng-click="logout()">Logout</button>
+    </div>
+  </ion-content>
+</ion-view>
