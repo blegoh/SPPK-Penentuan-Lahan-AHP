@@ -1,20 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $auth,$rootScope) {
-  $scope.logout = function () {
-    $auth.logout().then(function() {
 
-      // Remove the authenticated user from local storage
-      localStorage.removeItem('user');
-
-      // Flip authenticated to false so that we no longer
-      // show UI elements dependant on the user being logged in
-      $rootScope.authenticated = false;
-
-      // Remove the current user info from rootscope
-      $rootScope.currentUser = null;
-    });
-  }
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -142,8 +129,8 @@ angular.module('starter.controllers', [])
         var user = JSON.stringify(response.user);
         localStorage.setItem('user', user);
         $rootScope.authenticated = true;
-
         $rootScope.currentUser = response.user;
+        console.log($rootScope.currentUser);
         $state.go('app.lahan');
       }).error(function(error){
         console.log("asu");
@@ -170,5 +157,34 @@ angular.module('starter.controllers', [])
   }
   $scope.back= function () {
     $state.go('login');
+  }
+})
+
+.controller('AccountCtrl', function($scope, $rootScope, $state,Auth,$auth) {
+  $scope.data = {};
+  $scope.update = function () {
+    var data = {
+      email: $scope.user.email,
+      name: $scope.user.name
+    };
+
+    Auth.register(data).success(function () {
+      $state.go('login');
+    })
+  };
+  $scope.user = $rootScope.currentUser;
+  $scope.logout = function () {
+    $auth.logout().then(function() {
+
+      // Remove the authenticated user from local storage
+      localStorage.removeItem('user');
+
+      // Flip authenticated to false so that we no longer
+      // show UI elements dependant on the user being logged in
+      $rootScope.authenticated = false;
+
+      // Remove the current user info from rootscope
+      $rootScope.currentUser = null;
+    });
   }
 });
